@@ -6,6 +6,17 @@
   let logoScale = tweened(0.5, { duration: 1200, easing: quintOut });
   let formOpacity = tweened(0, { duration: 800, easing: quintOut });
 
+  let email = ''
+  let password = ''
+
+
+
+  const login = () => {
+   
+      if(email == "admin@gmail.com") window.location.href = '/admin'
+      if(email == 'resident@gmail.com') window.location.href = '/residents'
+  }
+
   // Trigger animations on mount
   $: logoScale.set(1);
   $: formOpacity.set(1);
@@ -35,6 +46,7 @@
     class="w-full max-w-md bg-gray-900 bg-opacity-75 rounded-lg p-8 shadow-lg transition-all duration-700 hover:shadow-2xl transform hover:scale-105"
     style="opacity: {$formOpacity};"
     in:fade={{ duration: 1000 }}
+    onsubmit={login}
   >
     <h2 class="text-2xl font-bold mb-6 text-center">Welcome Back!</h2>
 
@@ -45,7 +57,7 @@
         id="email"
         class="peer w-full p-4 bg-gray-800 text-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none placeholder-transparent"
         placeholder="Email Address"
-        required
+        bind:value={email}
       />
       <label
         for="email"
@@ -62,7 +74,6 @@
         id="password"
         class="peer w-full p-4 bg-gray-800 text-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none placeholder-transparent"
         placeholder="Password"
-        required
       />
       <label
         for="password"
